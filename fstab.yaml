@@ -1,5 +1,0 @@
-mountpoints:
-  /:
-    url: "https://author-p162613-e2035059.adobeaemcloud.com/bin/franklin.delivery/VishnuRachamallu/eds1-repoless/main"
-    type: "markup"
-    suffix: ".html"
