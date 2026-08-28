@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>User Profile</title>
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <div>
+        {{#results}}
+        <!-- Hero block -->
+        <div class="hero">
+          <div>
+            <div>
+              <p>
+                <picture>
+                  <img src="{{picture.large}}" alt="{{name.first}} {{name.last}}">
+                </picture>
+              </p>
+              <h1>{{name.title}} {{name.first}} {{name.last}}</h1>
+              <p>Dynamic user profile loaded from randomuser.me via JSON2HTML overlay.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Details in a Cards block -->
+        <div class="cards">
+          <div>
+            <div>
+              <strong>Contact</strong>
+              <p><a href="mailto:{{email}}">{{email}}</a></p>
+            </div>
+            <div>
+              <strong>Location</strong>
+              <p>{{location.street.number}} {{location.street.name}}, {{location.city}}, {{location.state}}, {{location.country}}</p>
+            </div>
+          </div>
+        </div>
+        {{/results}}
+      </div>
+    </main>
+    <footer></footer>
+  </body>
+</html>
