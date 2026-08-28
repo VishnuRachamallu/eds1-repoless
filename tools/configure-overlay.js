@@ -11,12 +11,12 @@ function makeRequest(url, options = {}, postData = null) {
   return new Promise((resolve, reject) => {
     const req = https.request(url, options, (res) => {
       let body = '';
-      res.on('data', (chunk) => body += chunk);
+      res.on('data', (chunk) => { body += chunk; });
       res.on('end', () => {
         resolve({
           statusCode: res.statusCode,
           headers: res.headers,
-          body: body
+          body,
         });
       });
     });
@@ -33,15 +33,15 @@ function makeRequest(url, options = {}, postData = null) {
 async function configureAemOverlay() {
   console.log('\n--- 1. Configuring AEM Content Overlay ---');
   const url = `https://admin.hlx.page/config/${org}/sites/${site}/content.json`;
-  
+
   // Step A: Fetch current configuration
   console.log(`Fetching current configuration from: ${url}`);
   const getOptions = {
     method: 'GET',
     headers: {
       'x-auth-token': adminToken,
-      'Accept': 'application/json'
-    }
+      Accept: 'application/json',
+    },
   };
 
   let currentConfig = {};
@@ -61,22 +61,22 @@ async function configureAemOverlay() {
   const payload = {
     source: currentConfig.source || {
       url: `https://author-p162613-e1741353.adobeaemcloud.com/bin/franklin.delivery/${org}/${site}/${branch}`,
-      type: 'markup'
+      type: 'markup',
     },
     overlay: {
       url: `https://json2html.adobeaem.workers.dev/${org}/${site}/${branch}`,
-      type: 'markup'
-    }
+      type: 'markup',
+    },
   };
 
-  console.log(`Updating overlay configuration...`);
+  console.log('Updating overlay configuration...');
   const postOptions = {
     method: 'POST',
     headers: {
       'x-auth-token': adminToken,
       'Content-Type': 'application/json',
-      'Accept': 'application/json'
-    }
+      Accept: 'application/json',
+    },
   };
 
   try {
@@ -103,16 +103,16 @@ async function configureJson2HtmlWorker() {
       path: '/users/',
       endpoint: 'https://randomuser.me/api/?seed={{id}}',
       regex: '/[^/]+$/',
-      template: '/templates/user.html'
-    }
+      template: '/templates/user.html',
+    },
   ];
 
   const postOptions = {
     method: 'POST',
     headers: {
-      'Authorization': `token ${adminToken}`,
-      'Content-Type': 'application/json'
-    }
+      Authorization: `token ${adminToken}`,
+      'Content-Type': 'application/json',
+    },
   };
 
   try {
